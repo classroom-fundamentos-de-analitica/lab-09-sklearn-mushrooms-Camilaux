@@ -55,9 +55,11 @@ y_pred_test = estimator.predict(x_test)
 accuracy_train = eval_metrics(y_true_train, y_pred_train)
 accuracy_test = eval_metrics(y_true_test, y_pred_test)
 
-if __name__ == "__main__":
+def test_():
+    """Run grading script."""
     assert accuracy_train > 0.99
     assert accuracy_test > 0.99
 
+test_()
 
 
