@@ -24,6 +24,20 @@ def load_datasets():
     train_dataset = pd.read_csv("train_dataset.csv")
     test_dataset = pd.read_csv("test_dataset.csv")
 
+    train_dataset['type'] = train_dataset['type'].map({'p': 1, 'e': 0})
+    test_dataset['type'] = test_dataset['type'].map({'p': 1, 'e': 0})
+
+    from sklearn.preprocessing import LabelEncoder
+
+    # Create a LabelEncoder object
+    label_encoder = LabelEncoder()
+
+    for col in train_dataset.columns:
+        if col != 'type':
+            # Encode the column using LabelEncoder
+            train_dataset[col] = label_encoder.fit_transform(train_dataset[col])
+            test_dataset[col] = label_encoder.transform(test_dataset[col])
+
     x_train = train_dataset.drop("type", axis=1)
     y_train = train_dataset["type"]
 
